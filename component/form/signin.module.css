@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    padding:0.5rem 1rem;
+    background-color: white;
+    margin-top:3rem;
+    align-items: center;
+}
+
+.form{
+    padding:0rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    height:350px;
+}
+.form div {
+    display: flex;
+    flex-direction: column;
+    gap:.5rem
+}
+.form div input{
+    padding:1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    border:none
+}
+.form div input::placeholder{
+    color:white
+}
