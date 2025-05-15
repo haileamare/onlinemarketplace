@@ -8,7 +8,7 @@ export async function POST(req){
     return NextResponse.json({error:"All fields are required"},{status:400})
   }
   try{
-    console.log('calm down')
+    
    await ConnectToDatabase();
 
    const existingUser=await User.findOne({email})

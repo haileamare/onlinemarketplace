@@ -10,12 +10,13 @@ import {gray, red, green } from '../theme';
 export const dataDisplayCustomizations = {
   MuiList: {
     styleOverrides: {
-      root: {
+      root:({theme})=> ({
         padding: '8px',
         display: 'flex',
         flexDirection: 'column',
         gap: 0,
-      },
+        backgroundColor:theme.palette.background.default
+      }),
     },
   },
   MuiListItem: {
@@ -37,7 +38,7 @@ export const dataDisplayCustomizations = {
           opacity: 0.7,
           '&.Mui-selected': {
             opacity: 1,
-            backgroundColor: alpha(theme.palette.action.selected, 0.3),
+            backgroundColor:alpha(theme.palette.action.selected, 0.3),
             [`& .${svgIconClasses.root}`]: {
               color: (theme.vars || theme).palette.text.primary,
             },

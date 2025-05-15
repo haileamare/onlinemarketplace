@@ -2,7 +2,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
 import User from "@/models/user-model";
+import ConnectToDatabase from "@/lib/connect";
+
 export async function GET(req, { params }) {
+    await ConnectToDatabase()
   const session = await getServerSession(authOptions); // ✅ correctly passed
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -15,7 +18,7 @@ export async function GET(req, { params }) {
 }
 
 export async function DELETE(req,{params}){
-    console.log('Delete')
+    
     const session=await getServerSession(authOptions)
     if(!session){
         return NextResponse.json({error:"Unauthorized"},{status:401})

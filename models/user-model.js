@@ -29,6 +29,24 @@ const UserSchema=new mongoose.Schema({
     seller:{
         type:Boolean,
         default:false
+    },
+    image:{
+        url:{
+            type:String,
+        },
+        public_id:{
+            type:String,
+        },
+        original_filename:{
+            type:String
+        },
+        bytes:{
+            type:String
+        },
+        alt:{
+            type:String,
+            default:'User Profile image'
+        }
     }
 });
 

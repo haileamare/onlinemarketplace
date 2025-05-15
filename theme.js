@@ -89,15 +89,15 @@ export const getDesignTokens = (mode) => {
         ...(mode === 'dark' && {
           contrastText: brand[50],
           light: brand[300],
-          main:'hsl(0, 0%, 99%)',
-          dark: brand[700],
+          main:brand[400],
+          dark: red[700],
         }),
       },
       // Other colors (info, warning, etc.)
       grey: { ...gray },
       divider: mode === 'dark' ? alpha(gray[700], 0.6) : alpha(gray[300], 0.4),
       background: {
-        default: mode === 'dark' ? gray[900] : 'hsl(0, 0%, 99%)',
+        default: mode === 'dark' ? gray[900] : 'hsl(0, 0.00%, 100.00%)',
         paper: mode === 'dark' ? 'hsl(220, 30%, 7%)' : 'hsl(220, 35%, 97%)',
       },
       text: {

@@ -1,6 +1,5 @@
 import ConnectToDatabase from "@/lib/connect"
 import User from "@/models/user-model"
-import { Call } from "@mui/icons-material"
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 
@@ -9,7 +8,6 @@ export const authOptions = {
     Credentials({
         async authorize(credentials){
            const {email,password}=credentials
-           console.log('0')
             await ConnectToDatabase()
             const userExists=await User.findOne({email})
             console.log('1')
@@ -17,8 +15,9 @@ export const authOptions = {
             return null
            }
            let isMatch=await userExists.verifyPassword(password);
-           console.log('3',isMatch)
+           
            if(!isMatch){
+            console.log('notmatched')
             return null
            }
            return {

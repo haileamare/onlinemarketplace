@@ -17,6 +17,8 @@
     "@mui/styles": "^6.4.8",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.1",
+    "formidable": "^3.5.4",
     "mongoose": "^8.13.2",
     "next": "15.2.5",
     "next-auth": "^4.24.11",
