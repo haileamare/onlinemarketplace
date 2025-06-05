@@ -82,7 +82,7 @@ export default function Nav() {
           <StyledIconButton href="/" component={Link}>
             Mern Marketplace <Home />
           </StyledIconButton>
-          <StyledButton component={Link} href="/shopes">
+          <StyledButton component={Link} href="/shop">
             AllSHOPS
           </StyledButton>
           <StyledIconButton component={Link} href="/cart">
@@ -90,7 +90,7 @@ export default function Nav() {
           </StyledIconButton>
         </StyledBox>
         <StyledBox>
-          <StyledButton component={Link} href="/user/shopes">
+          <StyledButton component={Link} href="/user/myshops">
             MYSHOPS
           </StyledButton>
           {session && (<StyledButton component={Link} href={"/user/"+session.user.id}>

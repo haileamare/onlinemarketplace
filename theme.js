@@ -89,7 +89,7 @@ export const getDesignTokens = (mode) => {
         ...(mode === 'dark' && {
           contrastText: brand[50],
           light: brand[300],
-          main:brand[400],
+          main:gray[50],
           dark: red[700],
         }),
       },
@@ -103,6 +103,7 @@ export const getDesignTokens = (mode) => {
       text: {
         primary: mode === 'dark' ? 'hsl(0, 0.00%, 100.00%)' : gray[800],
         secondary: mode === 'dark' ? gray[400] : gray[600],
+        contrastText:mode==='dark'?gray[800]:'hsl(0,0.00%,100.00%)'
       },
     },
     typography: {

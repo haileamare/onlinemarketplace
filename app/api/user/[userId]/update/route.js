@@ -83,7 +83,7 @@ export async function PUT(req, { params }) {
     let imagePubId=euser.image.public_id
 
     console.log('photo',isSameImage)
-    if(isSameImage){
+    if(!isSameImage){
       if(euser?.image?.publicId){
         deleteCloudImage(euser.image.publicId)
       }
