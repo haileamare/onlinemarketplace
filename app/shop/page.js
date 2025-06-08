@@ -6,7 +6,7 @@ export default async function Shops(){
     //const {data:session}=await getServerSession(authOptions)
     let shops=[]
     try{
-      let result=await fetch('http://localhost:3000/api/shop/allshopes/',{
+      let result=await fetch('http://localhost:3000/api/shop/shops/',{
         method:'GET',
         headers:{
           'Accept':'application/json'

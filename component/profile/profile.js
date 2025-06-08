@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Paper, Typography, Avatar, Button, useTheme } from '@mui/material';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+
 const ProfileDetailPage = ({ userData,session}) => {
  const theme=useTheme()
   const handleDelete=async ()=>{
@@ -41,8 +42,8 @@ const ProfileDetailPage = ({ userData,session}) => {
         <Typography variant="subtitle1" color="text.secondary">
           {userData?.email}
         </Typography>
-        <Typography variant="h4" color='text.secondary' sx={{ marginTop: 2 }}>
-           <Typography variant='subtitle1' color='text.secondary' >Bio</Typography>
+        <Typography variant="p" color='text.secondary' sx={{ marginTop: 2,display:'block'}}>
+           <Typography variant='h4' color='text.secondary' >Bio</Typography>
           {userData?.about}
         </Typography>
         {

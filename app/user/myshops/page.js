@@ -1,5 +1,4 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import ShopsLayout from "@/app/shop/layout";
 import MyShopsUi from "@/component/shops/myshops";
 import { getServerSession } from "next-auth";
 import { headers } from "next/headers";
@@ -25,7 +24,7 @@ export default async function MyShops(){
     }
   return (
     <Fragment>
-        <MyShopsUi shops={shops}/>
+       <MyShopsUi shops={shops}/>
     </Fragment>
   )
 }
