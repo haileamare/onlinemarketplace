@@ -82,7 +82,7 @@ export default function MyShopsUi(props) {
                                     {/* Edit Button */}
                                     <IconButton
                                         style={{ background: "transparent", float: "left" }}
-                                        onClick={() => router.push("/myshops/" + session.user.id)}
+                                        onClick={() => router.push("/shop/edit/" + shop._id)}
                                     >
                                         <Edit
                                             style={{
@@ -122,7 +122,7 @@ export default function MyShopsUi(props) {
 
                             {/* Wrap Only the Text in Link */}
                             <Link
-                                href={"/shop/edit/" + shop._id}
+                                href={"/shop/" + shop._id}
                                 style={{
                                     textDecoration: "none",
                                     color: theme.palette.text.primary,

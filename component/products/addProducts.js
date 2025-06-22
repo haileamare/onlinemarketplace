@@ -1,23 +1,26 @@
 'use client'
 import { FileUpload, Visibility, VisibilityOff } from "@mui/icons-material"
-import { StyledCard,SignInContainer } from "./stylecom"
 import { useState } from "react"
 import { useTheme } from "@emotion/react"
 import { Box, Typography,FormControl,FormLabel,TextField,Button, Checkbox, IconButton, TextareaAutosize } from "@mui/material"
-export default function EditProfileForm({userData}){
+import { SignInContainer, StyledCard } from "../form/stylecom"
+
+export default function AddNewProductUi({shopId}){
+    const [product,setProduct]=useState({})
     const theme=useTheme()
     const [type,setType]=useState('password')
     // const {data:session,update}=useSession()
     // const updateSessionData=async ()=>{
     //     await update();
     // }
+    
     const [values,setValues]=useState({
-        name:userData.name,
-        email:userData.email,
-        password:'',
-        photo:{},
-        checked:userData.seller,
-        about:''
+        name:'',
+        description:'',
+        category:'',
+        quantity:{},
+        price:'',
+        photo:{}
     })
     const handleType=()=>{
         const value=type=='password'?'text':'password'
@@ -29,15 +32,15 @@ export default function EditProfileForm({userData}){
        let formData=new FormData()
 
        formData.append('name',values.name);
-       formData.append('email',values.email);
-       formData.append('password',values.password)
+       formData.append('description',values.description);
+       formData.append('quantity',values.quantity)
        formData.append('photo',values.photo),
-       formData.append('seller',values.checked)
-       formData.append('about',values.about)
+       formData.append('price',values.price)
+       formData.append('category',values.category)
 
        try{
-        let response=await fetch(`/api/user/${userData._id}/update/`,{
-            method:'PUT',
+        let response=await fetch(`/api/product/${shopId}`,{
+            method:'POST',
             credentials:'include',
             body:formData
         })
@@ -45,10 +48,19 @@ export default function EditProfileForm({userData}){
             throw new Error('error in the editprofile apis ')
         }
        const {data}=await response.json()
-       setValues({...values,...data})
+       setProduct({...data.data})
        }catch(err){
           console.log('error edit',err)
        }
+
+    //    setValues({
+    //     name:"",
+    //     category:"",
+    //     image:"",
+    //     price:"",
+    //     quantity:"",
+    //     description:""
+    //    })
     }
     const getInput=(name)=>(event)=>{
         let value=''
@@ -61,7 +73,7 @@ export default function EditProfileForm({userData}){
         }
        setValues({...values,[name]:value})
     }
-    console.log('valuessssss',values.photo)
+   
     return (
                 <SignInContainer sx={{ padding: theme.spacing(2) ,height:'auto'}}>
                     <StyledCard>
@@ -69,7 +81,7 @@ export default function EditProfileForm({userData}){
                             component="h1"
                             variant="h4"
                             sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
-                        >Edit Profile
+                        >Add New Product
                         </Typography>
                         <Box
                             component={'form'}
@@ -98,67 +110,80 @@ export default function EditProfileForm({userData}){
                                 />
                             </FormControl>
                             <FormControl>
-                                <FormLabel htmlFor="email">Email</FormLabel>
+                                <FormLabel htmlFor="description">description</FormLabel>
                                 <TextField
-                                    id="email"
-                                    type="email"
-                                    value={values.email}
-                                    placeholder="your@email.com"
-                                    autoComplete="email"
+                                    id="description"
+                                    type="text"
+                                    value={values.description}
+                                    placeholder="description about the Prod..."
                                     required
                                     fullWidth
                                     variant="outlined"
                                     color={'primary'}
-                                    onChange={getInput('email')}
+                                    onChange={getInput('description')}
                                 />
                             </FormControl>
                             <FormControl>
                                 <div >
-                                <FormLabel htmlFor="password">New Password</FormLabel>
+                                <FormLabel htmlFor="category">category</FormLabel>
                                 <TextField
-                                    placeholder="new password here..."
-                                    type={type}
-                                    value={values.password}
-                                    id="password"
-                                    autoComplete="current-password"
+                                    placeholder="the category of this produ..."
+                                    type='text'
+                                    value={values.category}
+                                    id="category"
                                     required
                                     fullWidth
                                     variant="outlined"
                                     color={'primary'}
-                                   onChange={getInput('password')}
+                                   onChange={getInput('category')}
                                 />
-                                <IconButton style={{position:'absolute',right:theme.spacing(1)}} onClick={handleType}>
-                                    {type=='password'?<Visibility/>:<VisibilityOff/>}
-                                </IconButton>
+                        
                                 </div>
                             </FormControl>
                             <FormControl>
-                                <FormLabel>About yourself</FormLabel>
-                                <TextareaAutosize value={values.about} onChange={getInput('about')} style={{backgroundColor:theme.palette.background.default,padding:theme.spacing(1)}}/>
-                            </FormControl>
-                            <div style={{display:'flex',justifyContent:'start',alignItems:'center'}}>
-                                <FormLabel htmlFor="checkbox">Is Seller? 
-                                <Checkbox
-                                   checked={values.checked}
-                                    id="checkbox"
-                                    variant="outlined"
-                                    color={'primary'}
-                                   onChange={()=>setValues({...values,checked:values.checked?false:true})}
-                                />{values.checked?'Yes':'No'}</FormLabel>
-                            </div>
-                            <FormControl sx={{display:'flex',justifyContent:'start',alignItems:'center'}}>
-                                <FormLabel htmlFor="photo" style={{display:'flex',justifyContent:'center',alignItems:'center'}}>Upload Photo {values?.photo?.name} <FileUpload/></FormLabel>
+                                <div >
+                                <FormLabel htmlFor="quantity">Quantity</FormLabel>
                                 <TextField
-                                    style={{display:'none'}}
-                                    type="file"
-                                    name='photo'
-                                    id="photo"
+                                    placeholder="the quantity of this produ..."
+                                    type='number'
+                                    value={values.quantity}
+                                    id="quantity"
+                                    required
                                     fullWidth
                                     variant="outlined"
                                     color={'primary'}
+                                   onChange={getInput('quantity')}
+                                />
+                        
+                                </div>
+                            </FormControl>
+                            <FormControl>
+                                <div >
+                                <FormLabel htmlFor="quantity">Price</FormLabel>
+                                <TextField
+                                    placeholder="the price of one produ..."
+                                    type='number'
+                                    value={values.price}
+                                    id="price"
+                                    required
+                                    fullWidth
+                                    variant="outlined"
+                                    color={'primary'}
+                                   onChange={getInput('price')}
+                                />
+                        
+                                </div>
+                            </FormControl>
+                            <FormControl sx={{display:'flex',justifyContent:'start',alignItems:'center'}}>
+                                <FormLabel htmlFor="image" style={{display:'flex',justifyContent:'center',alignItems:'center'}}>Upload Photo {values?.photo?.name} <FileUpload/></FormLabel>
+                                <input
+                                    style={{display:'none'}}
+                                    type="file"
+                                    name='photo'
+                                    id="image"
                                    onChange={getInput('photo')}
                                 />
-
+                                {values.photo.name}
                             </FormControl>
                             <Button type="submit" variant="contained" color="primary">Submit</Button>
                         </Box>

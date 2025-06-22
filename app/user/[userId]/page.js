@@ -9,6 +9,7 @@ import { Fragment } from "react";
 export default async function UserProfile({ params }) {
    const session=await getServerSession(authOptions)
    console.log('sessiontoken',session.token)
+   console.log('sever session',session)
   const { userId } = await params; // No need to await
   let userData = {};
 
