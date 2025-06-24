@@ -95,14 +95,12 @@ export async function POST(req,{params}){
 
 export async function GET(req,{params}){
     const {shopId}=await params;
-    console.log('params',shopId)
     try{
         await ConnectToDatabase();
         const products=await productsModel.find({shop:shopId}).populate('shop','_id name')
         if(!products){
           return NextResponse.json({message:"No Products avaliable"},{status:203})
         }
-        console.log('rpoduc',products)
         return NextResponse.json({data:products,message:"products retrieved successfully"},{status:200})
     }catch(err){
         console.log('error in get products',err.message)
